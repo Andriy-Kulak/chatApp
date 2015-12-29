@@ -1,0 +1,33 @@
+#about-image {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+}
+#about {
+    border-bottom: 2px solid black;
+}
+p {
+    text-indent: 40px;
+}
+
+/*
+* for the Chat app
+*/
+.user-window{
+    border-left: 2px solid black;
+    height: 300px;
+}
+.username{
+    color: red;
+    font-weight: bold;
+}
+
+.chat-window{
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+ul {
+    list-style-type: none;
+}
