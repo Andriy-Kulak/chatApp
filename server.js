@@ -59,10 +59,15 @@ app.set('views', path.resolve(__dirname, 'client', 'views'));
 
 app.use(express.static(path.resolve(__dirname, 'client')));
 
-//set our home route
-app.get('/', function(req, res){
+//Home Route
+// Important:: The '*' is intended for when user refreshes page on the application.
+app.get('/*', function(req, res){
 	res.render('index.ejs');
 });
+
+
+
+
 
 //make our app listen for incoming requests on the port assigned above
 http.listen(port, function(){
