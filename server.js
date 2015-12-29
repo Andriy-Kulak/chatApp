@@ -21,7 +21,7 @@ app.set('views', path.resolve(__dirname, 'client', 'views'));
 var users = [];
 io.on('connection', function(socket){
 	var username = '';
-	console.log('A user has connected');
+	console.log("A user has connected");
 
 	socket.on('request-users', function(){
 		socket.emit('users', {users: users});
@@ -33,22 +33,22 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('add-user', function(data){
+
 		if(users.indexOf(data.username) == -1){
 			io.emit('add-user', {
 				username: data.username
 			});
 			username = data.username;
 			users.push(data.username);
-		}
-		else {
+		} else {
 			socket.emit('prompt-username', {
-				message: 'User already Exists'
+				message: 'User already Exists. Please try again! :-)'
 			})
 		}
 	});
 
 	socket.on('disconnect', function(){
-		console.log(username + ' has disconnected!');
+		console.log('A user has disconnected!');
 		users.splice(users.indexOf(username), 1);
 		io.emit('remove-user', {username: username});
 	})

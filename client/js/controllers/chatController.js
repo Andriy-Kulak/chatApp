@@ -1,12 +1,11 @@
 myApp.controller('chatController', ['$scope', 'Socket', function($scope, Socket){
 	//connecting to Socket
 	Socket.connect();
-
-	// Users and messages arrays
+	// Users and messages arrays that will be displayed in the app
 	$scope.users = [];
 	$scope.messages = [];
 
-
+	//requiring user to enter their username
 	var promptUsername = function(message){
 		bootbox.prompt(message, function(name){
 			if(name != null){
@@ -20,15 +19,16 @@ myApp.controller('chatController', ['$scope', 'Socket', function($scope, Socket)
 
 	//sending message to display
 	$scope.sendMessage = function(msg){
-		if(msg != null && msg != '' ){
-			Socket.emit('message', {message:msg});
+		if(msg != null && msg != '')
+			Socket.emit('message', {message: msg})
 		$scope.msg = '';
-		}
 	};
 
+	//prompting user to enter his/her name
 	promptUsername("What is your name?");
-	Socket.emit('request-users', {});
 
+	//receiving list of connected users
+	Socket.emit('request-users', {});
 	Socket.on('users', function(data){
 		$scope.users = data.users;
 	});
@@ -50,7 +50,7 @@ myApp.controller('chatController', ['$scope', 'Socket', function($scope, Socket)
 		$scope.messages.push({username: data.username, message: 'has left the channel'});
 	});
 
-	//In case server rejects username in case it already exixsts
+	//In case server rejects username in case it already exists
 	Socket.on('prompt-username', function(data){
 		promptUsername(data.message);
 	});
