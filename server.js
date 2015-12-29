@@ -2,6 +2,9 @@
 //Initialize our Express Web Framework
 var express = require ('express');
 var app = express();
+//twilio
+var client = require('twilio')('AC4425f2869cdbcc1072e9d1a3881628c3','d29a607128be30c8172ade7485779021');
+
 
 //native NodeJS
 var path = require('path');
@@ -61,11 +64,22 @@ app.use(express.static(path.resolve(__dirname, 'client')));
 
 //Home Route
 // Important:: The '*' is intended for when user refreshes page on the application.
-app.get('/*', function(req, res){
+app.get('/', function(req, res){
 	res.render('index.ejs');
 });
 
-
+app.get('/twilio', function(req, res){
+	client.sendMessage({
+		to: '+17182072478',
+		from: '+19292442285',
+		body: 'Hello Andriy'
+	}, function(err, data){
+		if(err) {
+			console.log(err);
+		}
+		console.log(data);
+	});
+});
 
 
 
