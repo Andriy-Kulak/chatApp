@@ -1,8 +1,12 @@
+/**
+ * To use the app, run "node server.js" and look at "localhost:8081" in web browser
+ */
 
 //Initialize our Express Web Framework
 var express = require ('express');
 var app = express();
-//twilio
+
+//twilio practice
 var client = require('twilio')('AC4425f2869cdbcc1072e9d1a3881628c3','d29a607128be30c8172ade7485779021');
 
 
@@ -64,10 +68,12 @@ app.use(express.static(path.resolve(__dirname, 'client')));
 
 //Home Route
 // Important:: The '*' is intended for when user refreshes page on the application.
-app.get('/', function(req, res){
+app.get('/*', function(req, res){
 	res.render('index.ejs');
 });
 
+
+// Practice URI to get twilio to notify with a message every time someone uses /twilio
 app.get('/twilio', function(req, res){
 	client.sendMessage({
 		to: '+17182072478',
